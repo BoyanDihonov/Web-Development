@@ -9,25 +9,30 @@
 
 <body>
   <h1>
-    <!-- Tite goes here -->
+    <%= title %>
   </h1>
   <p>Current second:
-    <!-- Current second goes here -->
-  </p>
-  if (seconds % 2===0) {
-  <ul>
-    <!-- List goes here if current second is even. -->
-    <!-- Otherwise it should display the following: -->
-    <!-- <p>No items to display</p> -->
-  </ul>
-  } else {
-  <p>No items to display</p>
-  }
-  <p>
-    <!-- HTML content goes here -->
-  </p>
 
-  <!-- Footer goes here -->
+    <%= seconds %>
+  </p>
+  <% if (seconds % 2===0) { %>
+    <ul>
+     
+      <%items.forEach((fruit)=> { %>
+        <li>
+          <%=fruit %>
+        </li>
+        <%}) %>
+    </ul>
+    <% } else {%>
+      <p>No items to display</p>
+      <% } %>
+
+        <p>
+          <%- htmlContent %>
+        </p>
+
+        <%- include("footer.ejs") %>
 </body>
 
 </html>
