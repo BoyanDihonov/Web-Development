@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Taco Recipes</title>
   <link rel="stylesheet" type="text/css" href="/styles/main.css">
@@ -9,27 +8,38 @@
 <body>
   <h1>Taco Town 🌮</h1>
 
+  <!-- Form to select taco type -->
   <form action="/recipe" method="POST" class="buttons">
-    <button type="submit" value="chicken" name="choice">🍗</button>
-    <button type="submit" value="beef" name="choice">🥩</button>
-    <button type="submit" value="fish" name="choice">🐟</button>
+    <button type="submit" value="chicken" name="choice">🍗 Chicken Taco</button>
+    <button type="submit" value="beef" name="choice">🥩 Beef Taco</button>
+    <button type="submit" value="fish" name="choice">🐟 Fish Taco</button>
   </form>
-  <div id="recipeContainer" class="hidden">
 
-    <!-- If no recipe yet, show: -->
-    <h2>Pick your favourite taco ingredient 👆</h2>
-    <!-- Else, show the recipe name e.g. <h2>Recipe name</h2>-->
+  <!-- Recipe container -->
+  <div id="recipeContainer">
+    <% if (recipe) { %> <!-- Only display the recipe if it exists -->
+      <h2 id="recipeTitle"><%= recipe.name %> Recipe</h2>
 
-    <h3>Ingredients:</h3>
-    <ul id="ingredientsList">
-      <li>Protein name, protein preparation</li>
-      <li>Salsa name</li>
-      <li>Every other topping</li>
-    </ul>
-
-
-
+      <h3>Ingredients:</h3>
+      <ul id="ingredientsList">
+        <li>
+          <strong>Protein:</strong> <%= recipe.ingredients.protein.name %>, <%= recipe.ingredients.protein.preparation %>
+        </li>
+        <li>
+          <strong>Salsa:</strong> <%= recipe.ingredients.salsa.name %> (Spiciness: <%= recipe.ingredients.salsa.spiciness %>)
+        </li>
+        <li>
+          <strong>Toppings:</strong>
+          <ul>
+            <% recipe.ingredients.toppings.forEach(function(topping) { %>
+              <li><%= topping.quantity %> of <%= topping.name %></li>
+            <% }) %>
+          </ul>
+        </li>
+      </ul>
+    <% } else { %>
+      <h2>Pick your favorite taco ingredient 👆</h2>
+    <% } %>
   </div>
 </body>
-
 </html>
