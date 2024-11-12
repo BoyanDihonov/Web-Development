@@ -39,7 +39,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Write your code here//
-
+app.get("/posts", (req, res) => {
+  res.json(posts)
+})
 //CHALLENGE 1: GET All posts
 
 //CHALLENGE 2: GET a specific post by id
